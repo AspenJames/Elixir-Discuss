@@ -18,8 +18,11 @@ defmodule Discuss.TopicController do
   end
 
   def create(conn, %{"topic" => topic}) do
-    case Topic.changeset(%Topic{}, topic)
-    |> Repo.insert do
+    changeset = conn.assigns.user
+    |> build_assoc(:topics)
+    |> Topic.changeset(topic)
+
+    case Repo.insert(changeset) do
       {:ok, _topic} ->
         conn
         |> put_flash(:info, "Topic Created")
