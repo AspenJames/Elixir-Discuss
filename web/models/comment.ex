@@ -8,7 +8,6 @@ defmodule Discuss.Comment do
 
     belongs_to :user, Discuss.User
     belongs_to :topic, Discuss.Topic
-    has_many :comments, Discuss.Comment
     
     timestamps()
   end
